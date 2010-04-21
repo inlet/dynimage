@@ -37,8 +37,8 @@ Create your own modifiers is easy like pushing a function through the constructo
 
 By default the ImageModifiers class provides the most primair modifier functionality like scaling and cropping:
 
-* ImageModifiers.fit <code>*Make the image proportionally fit to given boundaries*</code>
-* ImageModifiers.fill *Fill the image to given boundaries*
+* ImageModifiers.fit		<code>*Make the image proportionally fit to given boundaries*</code>
+* ImageModifiers.fill		<code>*Fill the image to given boundaries*</code>
 
 <pre>
 var image : Image = new Image("url.to.image", null, null, preloaderClip);
