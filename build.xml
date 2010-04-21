@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Build" basedir="." default="build dynimage swc">
+
+	<target name="build dynimage swc">
+		<fdt.launch.library debug="false" projectname="DynImage" autoaddclasspath="false" target="bin/dynimage.swc" compilerarguments="-library-path {flexSDK}/frameworks/locale/en_US -include-sources ${basedir}/source/dynimage" />
+	</target>
+
+</project>
