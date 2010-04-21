@@ -64,14 +64,70 @@ Like the included ImageModifiers class, you can easily create your own one to ma
 All you have to do is create a function like this:
 
 <pre>
-/**
-* @param original:DisplayObject the original image to modify
-* @param params:Object the specified parameters
-*/
-public static function myModifier(original : DisplayObject, params : Object) : Bitmap
+package 
 {
-	// manipulate original with params
-	var newImage : Bitmap = ....
-	return newImage;
+	public class MyModifiers
+	{
+		/**
+		* @param original:DisplayObject the original image to modify
+		* @param params:Object the specified parameters
+		*/
+		public static function doSomethingFunky(original : DisplayObject, params : Object) : Bitmap
+		{
+			// manipulate original with params
+			var newImage : Bitmap = ....
+			return newImage;
+		}
+	}
 }
 </pre>
+
+Now let's use your fancy modifier:
+
+<pre>
+var image : Image = new Image("path.to.image", MyModifiers.doSomethingFunky, {var1:"this var can be used in your function", radius:300});
+addChild(image);
+</pre>
+
+# Extend the Image class to create your own animations
+
+For example fading preloader and image
+
+<pre><code>
+package  
+{
+	import dynimage.Image;
+
+	import com.greensock.TweenLite;
+	import com.greensock.plugins.AutoAlphaPlugin;
+	import com.greensock.plugins.TweenPlugin;
+
+	import flash.display.DisplayObject;
+
+	public class FadeImage extends Image 
+	{
+		public function FadeImage(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true)
+		{
+			super(url, modifier, modifierParams, preloader, autoStart);
+			TweenPlugin.activate([AutoAlphaPlugin]);
+		}
+
+		override protected function animatePreloaderIn(preloader : DisplayObject, onComplete : Function) : void 
+		{
+			TweenLite.to(preloader, 0.3, {autoAlpha: 1, onComplete: onComplete});
+		}
+
+
+		override protected function animatePreloaderOut(preloader : DisplayObject, onComplete : Function) : void 
+		{
+			TweenLite.to(preloader, 0.3, {autoAlpha: 0, onComplete: onComplete});
+		}
+
+		override protected function animateAssetIn(asset : DisplayObject, onComplete : Function) : void 
+		{
+			TweenLite.to(asset, 0.3, {autoAlpha:1, onComplete: onComplete});
+		}
+	}
+}
+</code></pre>
+
