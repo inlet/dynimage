@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.powerflasher.fdt.ui.MxmlcGroup">
 <stringAttribute key="APP_ARGUMENTS" value=""/>
-<stringAttribute key="ARGUMENTS" value="-define=CONFIG::Debug,true -define+=CONFIG::Release,false -default-size 500 500 -default-frame-rate 31 -default-background-color 0xFFFFFF -verbose-stacktraces=true -library-path {flexSDK}/frameworks/locale/en_US -debug=true"/>
+<stringAttribute key="ARGUMENTS" value="-default-size 500 500 -default-frame-rate 31 -default-background-color 0xFFFFFF -verbose-stacktraces=true -library-path {flexSDK}/frameworks/locale/en_US -debug=true"/>
 <stringAttribute key="FLEX_SDK_NAME" value="Flex_3_SDK_0_Pure"/>
 <booleanAttribute key="KILL_PREVIUOS_VIEWER" value="false"/>
 <stringAttribute key="MAIN_CLASS" value="examples/pureas3/Main.as"/>

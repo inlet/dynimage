@@ -1,7 +1,7 @@
 package dynimage 
 {
 
-	public class ImgAlign 
+	public class ImageAlign 
 	{
 		public static const L : String = "L"; 
 		public static const TL : String = "TL";

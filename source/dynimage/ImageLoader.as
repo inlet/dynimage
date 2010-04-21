@@ -12,23 +12,23 @@ package dynimage
 	import flash.system.LoaderContext;
 	import flash.utils.getQualifiedClassName;
 
-	internal class ImgLoader extends EventDispatcher 
+	internal class ImageLoader extends EventDispatcher 
 	{
 
 		private var _waitingStack : Array = new Array( );
 		private var _loadingStack : Array = new Array( );
 		private var _loaderCount : uint;
 
-		public function ImgLoader(inLoaderCount : Number = Number.NaN) 
+		public function ImageLoader(inLoaderCount : Number = Number.NaN) 
 		{
-			_loaderCount = isNaN( inLoaderCount ) ? Img.LOADER_COUNT : inLoaderCount;
+			_loaderCount = isNaN( inLoaderCount ) ? Image.LOADER_COUNT : inLoaderCount;
 		}
 
 		public function loadAsset(inUrl : String, inName : String = "") : void 
 		{
 			if ((inUrl == null) || (inUrl.length == 0)) 
 			{
-				var evt : ImgLoaderEvent = new ImgLoaderEvent( ImgLoaderEvent.ERROR, inName );
+				var evt : ImageLoaderEvent = new ImageLoaderEvent( ImageLoaderEvent.ERROR, inName );
 				evt.error = "invalid url";
 				dispatchEvent( evt );
 				
@@ -101,7 +101,7 @@ package dynimage
 			if (_loadingStack.length == _loaderCount) return;
 			if (_waitingStack.length == 0 && _loadingStack.length == 0) 
 			{
-				dispatchEvent( new ImgLoaderEvent( ImgLoaderEvent.ALL_LOADED ) );
+				dispatchEvent( new ImageLoaderEvent( ImageLoaderEvent.ALL_LOADED ) );
 				return;
 			}
 			
@@ -124,11 +124,11 @@ package dynimage
 		{
 			var info : LoaderInfo = e.target as LoaderInfo;
 			var fd : ImageData = getDataForLoaderInfo( info );
-			var evt : ImgLoaderEvent;
+			var evt : ImageLoaderEvent;
 			
 			if (fd == null) 
 			{
-				evt = new ImgLoaderEvent( ImgLoaderEvent.ERROR, fd.name );
+				evt = new ImageLoaderEvent( ImageLoaderEvent.ERROR, fd.name );
 				evt.loader = fd.loader;
 				evt.error = "ImageLoader.handleLoadStarted() Data for loader not found";
 				dispatchEvent( evt );
@@ -136,7 +136,7 @@ package dynimage
 				return;
 			}
 
-			evt = new ImgLoaderEvent( ImgLoaderEvent.START, fd.name );
+			evt = new ImageLoaderEvent( ImageLoaderEvent.START, fd.name );
 			evt.loader = fd.loader;
 			evt.loadedBytesCount = 0;
 			evt.totalBytesCount = 0;
@@ -148,15 +148,15 @@ package dynimage
 			var info : LoaderInfo = e.target as LoaderInfo;
 			var fd : ImageData = getDataForLoaderInfo( info );
 			
-			var evt : ImgLoaderEvent;
+			var evt : ImageLoaderEvent;
 			if (fd == null) return;
 
 			if (e is ErrorEvent) 
 			{
-				evt = new ImgLoaderEvent( ImgLoaderEvent.ERROR, fd.name );
+				evt = new ImageLoaderEvent( ImageLoaderEvent.ERROR, fd.name );
 				evt.error = ErrorEvent( e ).text;
 			} else {
-				evt = new ImgLoaderEvent( ImgLoaderEvent.COMPLETE, fd.name );
+				evt = new ImageLoaderEvent( ImageLoaderEvent.COMPLETE, fd.name );
 				evt.loader = fd.loader;
 				evt.loaderInfo = info;
 				evt.url = fd.url;
@@ -178,15 +178,15 @@ package dynimage
 			var info : LoaderInfo = e.target as LoaderInfo;
 			var fd : ImageData = getDataForLoaderInfo( info );
 			
-			var evt : ImgLoaderEvent;
+			var evt : ImageLoaderEvent;
 			
 			if (fd == null) 
 			{
-				evt = new ImgLoaderEvent( ImgLoaderEvent.ERROR, fd.name );
+				evt = new ImageLoaderEvent( ImageLoaderEvent.ERROR, fd.name );
 				evt.loader = fd.loader;
 				evt.error = "ImageLoader.handleLoaderProgressEvent() Data for loader not found";
 			} else {
-				evt = new ImgLoaderEvent( ImgLoaderEvent.PROGRESS, fd.name );
+				evt = new ImageLoaderEvent( ImageLoaderEvent.PROGRESS, fd.name );
 				evt.loader = fd.loader;
 				evt.loadedBytesCount = e.bytesLoaded;
 				evt.totalBytesCount = e.bytesTotal;

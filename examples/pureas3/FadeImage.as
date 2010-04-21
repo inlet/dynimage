@@ -1,6 +1,6 @@
 package  
 {
-	import dynimage.Img;
+	import dynimage.Image;
 
 	import com.greensock.TweenLite;
 	import com.greensock.plugins.AutoAlphaPlugin;
@@ -11,9 +11,9 @@ package
 	/**
 	 * @author Patrick.Brouwer (patrick at inlet dot nl)
 	 */
-	public class FadeImg extends Img 
+	public class FadeImage extends Image 
 	{
-		public function FadeImg(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true)
+		public function FadeImage(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true)
 		{
 			super(url, modifier, modifierParams, preloader, autoStart);
 			TweenPlugin.activate([AutoAlphaPlugin]);

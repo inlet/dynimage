@@ -5,14 +5,14 @@ package dynimage
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
-	public class Img extends AbstractAsset 
+	public class Image extends AbstractAsset 
 	{
 		public static var LOADER_COUNT : int = 3;
 
 		private var _modifier : Function;
 		private var _modifierParams : Object;
 
-		public function Img(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true) 
+		public function Image(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true) 
 		{
 			_modifier = modifier;
 			_modifierParams = modifierParams;
@@ -77,7 +77,7 @@ package dynimage
 				bmpData.draw( inDisplayObject );
 			} catch (e : Error) 
 			{
-				var evt : ImgEvent = new ImgEvent(ImgEvent.ERROR);
+				var evt : ImageEvent = new ImageEvent(ImageEvent.ERROR);
 				evt.errorMessage = "Image.getCopyAsBitmap() Can't create bitmap data from " + inDisplayObject + ", width[" + inDisplayObject .width + "] height[" + inDisplayObject.height + "]";
 				dispatchEvent(evt);
 				

@@ -6,7 +6,7 @@ package dynimage
 	import flash.display.PixelSnapping;
 	import flash.geom.Matrix;
 
-	public class ImgModifiers 
+	public class ImageModifiers 
 	{
 
 		private static function getBitmap(displayObject : DisplayObject, matrix : Matrix, width : Number, height : Number) : Bitmap
@@ -85,7 +85,7 @@ package dynimage
 			h = (h > 0) ? h : displayObject.height * scale;
 
 			var bmp : Bitmap = getCopyAsBitmap( displayObject );
-			return ImgModifiers.getBitmap( bmp, matrix, w, h );
+			return ImageModifiers.getBitmap( bmp, matrix, w, h );
 		}
 
 		public static function fill(displayObject : DisplayObject, params : Object) : Bitmap 
@@ -104,7 +104,7 @@ package dynimage
 			h = (h > 0) ? h : displayObject.height * scale;
 
 			var bmp : Bitmap = getCopyAsBitmap( displayObject );
-			return ImgModifiers.getBitmap( bmp, matrix, w, h );
+			return ImageModifiers.getBitmap( bmp, matrix, w, h );
 		}
 		
 		private static function getCopyAsBitmap(inDisplayObject : DisplayObject) : Bitmap 

@@ -6,7 +6,7 @@
 	import flash.events.Event;
 	import flash.utils.getQualifiedClassName;
 
-	internal class ImgLoaderEvent extends Event 
+	internal class ImageLoaderEvent extends Event 
 	{
 
 		public static const START : String = "ImageLoaderEvent.START";
@@ -25,7 +25,7 @@
 		public var asset : DisplayObject;
 		public var url : String;
 
-		public function ImgLoaderEvent(inType : String, inName : String = "") 
+		public function ImageLoaderEvent(inType : String, inName : String = "") 
 		{
 			super( inType );
 			
@@ -34,7 +34,7 @@
 
 		public override function clone() : Event
 		{
-			var evt : ImgLoaderEvent = new ImgLoaderEvent( type, name );
+			var evt : ImageLoaderEvent = new ImageLoaderEvent( type, name );
 			evt.totalBytesCount = totalBytesCount;
 			evt.loadedBytesCount = loadedBytesCount;
 			evt.error = error;

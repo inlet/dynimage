@@ -3,26 +3,26 @@ package dynimage
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 
-	internal class ImgQueue extends EventDispatcher 
+	internal class ImageQueue extends EventDispatcher 
 	{
 
-		private static var _loader : ImgLoader;
-		private static var _instance : ImgQueue;
+		private static var _loader : ImageLoader;
+		private static var _instance : ImageQueue;
 		private static var _queue : Dictionary;
 
-		public static function getInstance() : ImgQueue 
+		public static function getInstance() : ImageQueue 
 		{
 			if(_instance == null) 
 			{
-				_instance = new ImgQueue( );
+				_instance = new ImageQueue( );
 				_queue = new Dictionary( );
 				
-				_loader = new ImgLoader( );
-				_loader.addEventListener( ImgLoaderEvent.ALL_LOADED, onImageLoaderEvent );
-				_loader.addEventListener( ImgLoaderEvent.COMPLETE, onImageLoaderEvent );
-				_loader.addEventListener( ImgLoaderEvent.ERROR, onImageLoaderEvent );
-				_loader.addEventListener( ImgLoaderEvent.PROGRESS, onImageLoaderEvent );
-				_loader.addEventListener( ImgLoaderEvent.START, onImageLoaderEvent );
+				_loader = new ImageLoader( );
+				_loader.addEventListener( ImageLoaderEvent.ALL_LOADED, onImageLoaderEvent );
+				_loader.addEventListener( ImageLoaderEvent.COMPLETE, onImageLoaderEvent );
+				_loader.addEventListener( ImageLoaderEvent.ERROR, onImageLoaderEvent );
+				_loader.addEventListener( ImageLoaderEvent.PROGRESS, onImageLoaderEvent );
+				_loader.addEventListener( ImageLoaderEvent.START, onImageLoaderEvent );
 			}
 			
 			return _instance;	
@@ -39,11 +39,11 @@ package dynimage
 			_loader.loadAsset( url, name );	
 		}
 
-		private static function onImageLoaderEvent(evt : ImgLoaderEvent) : void 
+		private static function onImageLoaderEvent(evt : ImageLoaderEvent) : void 
 		{
 			if(_queue[evt.name] != null) 
 			{
-				if(evt.type == ImgLoaderEvent.COMPLETE) 
+				if(evt.type == ImageLoaderEvent.COMPLETE) 
 					delete _queue[evt.name];
 			}
 			
@@ -60,7 +60,7 @@ package dynimage
 			getInstance( ).removeEventListener( type, listener );			
 		}
 
-		public static function get imageLoader() : ImgLoader 
+		public static function get imageLoader() : ImageLoader 
 		{
 			return _loader;	
 		}		
