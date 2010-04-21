@@ -1,10 +1,11 @@
 package  
 {
-	import dynimage.ImgAlign;
-	import dynimage.ImgModifiers;
 	import dynimage.Img;
+	import dynimage.ImgAlign;
 	import dynimage.ImgEvent;
+	import dynimage.ImgModifiers;
 
+	import logmeister.LogMeister;
 	import logmeister.connectors.TrazzleConnector;
 
 	import flash.display.Sprite;
