@@ -25,6 +25,10 @@ package
 			img.addEventListener(ImageEvent.ERROR, imgEvents);
 			img.addEventListener(ImageEvent.STARTED, imgEvents);
 			
+			
+			var image : Image = new Image("url.to.image", );
+			addChild(image);
+			
 			addChild(img);
 		}
 		
