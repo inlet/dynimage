@@ -93,7 +93,8 @@ addChild(image);
 
 For example fading preloader and image
 
-<pre><code>
+
+<pre>
 package  
 {
 	import dynimage.Image;
@@ -129,5 +130,16 @@ package
 		}
 	}
 }
-</code></pre>
+</pre>
+
+
+# Manage the loader count
+
+DynImage throttles the amount of loading images to prevent overload of data. By default there can be max 3 images loaded at a time. 
+
+You can modify the amount of loaders by editing the LOADER_COUNT static, for example let's change it to 5 loaders:
+
+<pre>
+Image.LOADER_COUNT = 5;
+</pre>
 
