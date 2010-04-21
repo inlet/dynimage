@@ -5,7 +5,7 @@
 <stringAttribute key="FLEX_SDK_NAME" value="Flex_3_SDK_0_Pure"/>
 <booleanAttribute key="KILL_PREVIUOS_VIEWER" value="false"/>
 <stringAttribute key="MAIN_CLASS" value="examples/pureas3/Main.as"/>
-<stringAttribute key="OUTPUT" value="PureAs3.swf"/>
+<stringAttribute key="OUTPUT" value="examples/PureAs3.swf"/>
 <booleanAttribute key="PASS_CP" value="true"/>
 <booleanAttribute key="PASS_MAIN_CLASS" value="true"/>
 <booleanAttribute key="PASS_SWCS" value="true"/>
@@ -16,7 +16,7 @@
 <stringAttribute key="PROJECT_NAME" value="DynImage"/>
 <stringAttribute key="PUBLISHER_ID" value=""/>
 <booleanAttribute key="START_SWF_ENABLED" value="true"/>
-<stringAttribute key="START_SWF_LOCATION" value="PureAs3.swf"/>
+<stringAttribute key="START_SWF_LOCATION" value="examples/PureAs3.swf"/>
 <stringAttribute key="START_SWF_WITH" value="External SWF Viewer"/>
 <booleanAttribute key="USE_GLOBAL_FCSH_LOCATION" value="true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
