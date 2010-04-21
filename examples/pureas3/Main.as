@@ -25,7 +25,9 @@ package
 			img.addEventListener(ImageEvent.ERROR, imgEvents);
 			img.addEventListener(ImageEvent.STARTED, imgEvents);
 			
-			addChild(img);
+			
+			var image : Image = new Image("path.to.image", ImageModifiers.fit, {width:300, height:300, align: ImageAlign.TR});
+			addChild(image);
 		}
 		
 
