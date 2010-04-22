@@ -50,11 +50,25 @@ package dynimage
 
 	public class Image extends AbstractAsset 
 	{
+		/**
+		 * Throttle setting.
+		 * The amount of loaders to use.
+		 */
 		public static var LOADER_COUNT : int = 3;
 
 		private var _modifier : Function;
 		private var _modifierParams : Object;
 
+		/**
+		 * Image
+		 * 
+		 * TODO: validate image type
+		 * @param url:String path to image
+		 * @param modifier:Function (optional) apply bitmap manipulation before it is rendered on display list
+		 * @param modifierParams:Object (optional) modifier arguments
+		 * @param preloader:DisplayObject (optional) show a preloader while image is loading?
+		 * @param autoStart:Boolean (optional) directly start with loading?
+		 */
 		public function Image(url : String, modifier : Function = null, modifierParams : Object = null, preloader : DisplayObject = null, autoStart : Boolean = true) 
 		{
 			_modifier = modifier;
@@ -69,6 +83,10 @@ package dynimage
 			super( url, preloader, autoStart );
 		}
 
+		/**
+		 * Place the preloader on stage.
+		 * Center preloader if possible.
+		 */
 		override protected function placePreloader() : void 
 		{
 			super.placePreloader( );
@@ -83,12 +101,23 @@ package dynimage
 			}
 		}
 
+		/**
+		 * Apply custom modifier on image is modifier is specified.
+		 * 
+		 * @param asset:DisplayObject
+		 * @return DisplayObject
+		 */
 		override protected function getModifiedAsset(asset : DisplayObject) : DisplayObject 
 		{
 			if (_modifier != null && _modifierParams != null) return _modifier( asset, _modifierParams );
 			return getCopyAsBitmap( asset );
 		}
 
+		/**
+		 * Forced the returned width
+		 * 
+		 * @return Number
+		 */
 		override public function get width() : Number 
 		{
 			if (_modifierParams)
@@ -97,6 +126,11 @@ package dynimage
 			return super.width;
 		}
 
+		/**
+		 * Force the returned height.
+		 * 
+		 * @return Number
+		 */
 		override public function get height() : Number 
 		{
 			if (_modifierParams)
@@ -106,7 +140,11 @@ package dynimage
 		}
 
 		/**
+		 * Return display object as Bitmap
+		 * 
 		 * TODO: Make proportional scale when width or height succeed max
+		 * @param inDisplayObject:DisplayObject
+		 * @return Bitmap
 		 */
 		private function getCopyAsBitmap(inDisplayObject : DisplayObject) : Bitmap 
 		{

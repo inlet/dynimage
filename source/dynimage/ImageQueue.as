@@ -41,6 +41,10 @@ package dynimage
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 
+	/**
+	 * Internal image queue'ing class.
+	 * @see ImageLoader
+	 */
 	internal class ImageQueue extends EventDispatcher 
 	{
 
@@ -48,6 +52,12 @@ package dynimage
 		private static var _instance : ImageQueue;
 		private static var _queue : Dictionary;
 
+		/**
+		 * Singleton
+		 * Creates a reference to ImageLoader
+		 * 
+		 * @return ImageQueue
+		 */
 		public static function getInstance() : ImageQueue 
 		{
 			if(_instance == null) 
@@ -66,6 +76,12 @@ package dynimage
 			return _instance;	
 		}
 
+		/**
+		 * Load an image
+		 * 
+		 * @param url:String path to image
+		 * @param inName:String unique identifier
+		 */
 		public static function loadImage(url : String, inName : String) : void 
 		{
 			_queue[inName] = url;
@@ -88,16 +104,32 @@ package dynimage
 			getInstance( ).dispatchEvent( evt.clone( ) );	
 		}
 
+		/**
+		 * Weak listener wrapper.
+		 * 
+		 * @param type:String
+		 * @param listener:Function
+		 */
 		public static function addEventListener(type : String,listener : Function) : void 
 		{
 			getInstance( ).addEventListener( type, listener, false, 0, true );			
 		}
 		
+		/**
+		 * Weak listener wrapper.
+		 * 
+		 * @param type:String
+		 * @param listener:Function
+		 */
 		public static function removeEventListener(type : String, listener : Function) : void 
 		{
 			getInstance( ).removeEventListener( type, listener );			
 		}
 
+		/**
+		 * Get the image loader.
+		 * @return ImageLoader
+		 */
 		public static function get imageLoader() : ImageLoader 
 		{
 			return _loader;	

@@ -44,9 +44,21 @@ package dynimage
 	import flash.display.PixelSnapping;
 	import flash.geom.Matrix;
 
+	/**
+	 * Default ImageModifiers like scaling/cropping
+	 */
 	public class ImageModifiers 
 	{
 
+		/**
+		 * Draw a bitmap from source applied with a matrix.
+		 * 
+		 * @param displayObject:DisplayObject
+		 * @param matrix:Matrix
+		 * @param width:Number
+		 * @param height:Number
+		 * @return Bitmap
+		 */
 		private static function getBitmap(displayObject : DisplayObject, matrix : Matrix, width : Number, height : Number) : Bitmap
 		{
 			var bmd : BitmapData = new BitmapData( width, height, true, 0x000000 );
@@ -58,6 +70,17 @@ package dynimage
 			return bmp;
 		}
 
+		/**
+		 * Get matrix with correct aligning.
+		 * 
+		 * @param originalWidth:Number
+		 * @param originalHeight:Number
+		 * @param newWidth:Number
+		 * @param newHeight:Number
+		 * @param scale:Number
+		 * @param align:String
+		 * @return Matrix
+		 */
 		private static function getMatrix(originalWidth : Number, originalHeight : Number, newWidth : Number, newHeight : Number, scale : Number, align : String) : Matrix
 		{
 			var matrix : Matrix = new Matrix( );
@@ -107,6 +130,13 @@ package dynimage
 			return matrix;
 		}
 
+		/**
+		 * Make image fit to given boundries.
+		 * 
+		 * @param displayObject:DisplayObject
+		 * @param params:Object with at least width, height and align properties in it.
+		 * @return Bitmap
+		 */
 		public static function fit(displayObject : DisplayObject, params : Object) : Bitmap
 		{
 			var w : Number = params.width;
@@ -126,6 +156,13 @@ package dynimage
 			return ImageModifiers.getBitmap( bmp, matrix, w, h );
 		}
 
+		/**
+		 * Make image fill a given boundries.
+		 * 
+		 * @param displayObject:DisplayObject
+		 * @param params:Object with at least width, height and align properties in it.
+		 * @return Bitmap
+		 */
 		public static function fill(displayObject : DisplayObject, params : Object) : Bitmap 
 		{
 			var w : Number = params.width;

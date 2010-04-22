@@ -50,6 +50,9 @@ package dynimage
 	import flash.system.LoaderContext;
 	import flash.utils.getQualifiedClassName;
 
+	/**
+	 * Internal Loader.
+	 */
 	internal class ImageLoader extends EventDispatcher 
 	{
 
@@ -57,11 +60,23 @@ package dynimage
 		private var _loadingStack : Array = new Array( );
 		private var _loaderCount : uint;
 
+		/**
+		 * Set the loader count to Image.LOADER_COUNT.
+		 * 
+		 * @param inLoaderCount:Number.
+		 * @see Image.LOADER_COUNT
+		 */
 		public function ImageLoader(inLoaderCount : Number = Number.NaN) 
 		{
 			_loaderCount = isNaN( inLoaderCount ) ? Image.LOADER_COUNT : inLoaderCount;
 		}
 
+		/**
+		 * Load image by url.
+		 * 
+		 * @param inUrl:String path to image
+		 * @param inName:String unique id for the image.
+		 */
 		public function loadAsset(inUrl : String, inName : String = "") : void 
 		{
 			if ((inUrl == null) || (inUrl.length == 0)) 
@@ -77,6 +92,9 @@ package dynimage
 			loadNext( );
 		}
 
+		/**
+		 * Stop loading all assets in queue and clear the waiting stack
+		 */
 		public function stopLoadingAll() : void 
 		{
 			for each (var fd : ImageData in _loadingStack) stopLoadingAsset( fd.name );
@@ -85,6 +103,11 @@ package dynimage
 			_waitingStack = new Array( );
 		}
 
+		/**
+		 * Stop loading image by name (identifier)
+		 * 
+		 * @param inName:String
+		 */
 		public function stopLoadingAsset(inName : String) : void 
 		{
 			for each (var fd : ImageData in _loadingStack) 
@@ -99,6 +122,11 @@ package dynimage
 			}
 		}
 
+		/**
+		 * Remove asset by name (identifier)
+		 * 
+		 * @param inName:String
+		 */
 		public function removeAsset(inName : String) : void
 		{
 			stopLoadingAsset( inName );
@@ -112,11 +140,21 @@ package dynimage
 			}
 		}
 
+		/**
+		 * Get the total bytes loaded
+		 * 
+		 * @param uint
+		 */
 		public function getTotalBytesLoaded() : uint 
 		{
 			return getTotalCount( "bytesLoaded" );
 		}
 
+		/**
+		 * Get the total bytes count
+		 * 
+		 * @param uint
+		 */
 		public function getTotalBytesCount() : uint 
 		{
 			return getTotalCount( "bytesTotal" );
@@ -252,6 +290,10 @@ package dynimage
 
 import flash.display.Loader;
 
+/**
+ * ImageData (vo).
+ * Part of the loading stacks, provides information data of one single image.
+ */
 internal class ImageData 
 {
 

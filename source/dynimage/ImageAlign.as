@@ -41,14 +41,49 @@ package dynimage
 
 	public class ImageAlign 
 	{
+		/**
+		 * Align image Center Left
+		 */
 		public static const L : String = "L"; 
+		
+		/**
+		 * Align image Top Left
+		 */
 		public static const TL : String = "TL";
+		
+		/**
+		 * Align image Bottom Left
+		 */
 		public static const BL : String = "BL";
+		
+		/**
+		 * Align image Center Right
+		 */
 		public static const R : String = "R";
+		
+		/**
+		 * Align image Top Right
+		 */
 		public static const TR : String = "TR";
+		
+		/**
+		 * Align image Bottom Right
+		 */
 		public static const BR : String = "BR";
+		
+		/**
+		 * Align image Center Bottom
+		 */
 		public static const B : String = "B";
+		
+		/**
+		 * Align image Center Top
+		 */
 		public static const T : String = "T"; 
+		
+		/**
+		 * Align image Center
+		 */
 		public static const CENTER : String = "center";
 	}
 }
