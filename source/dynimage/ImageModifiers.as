@@ -139,9 +139,9 @@ package dynimage
 		 */
 		public static function fit(displayObject : DisplayObject, params : Object) : Bitmap
 		{
-			var w : Number = params.width;
-			var h : Number = params.height;
-			var align : String = params.align ? params.align : "center";
+			var w : Number = params['width'];
+			var h : Number = params['height'];
+			var align : String = params['align'] ? params['align'] : "center";
 			
 			var fx : Number = w / displayObject.width;
 			var fy : Number = h / displayObject.height;
@@ -165,9 +165,9 @@ package dynimage
 		 */
 		public static function fill(displayObject : DisplayObject, params : Object) : Bitmap 
 		{
-			var w : Number = params.width;
-			var h : Number = params.height;
-			var align : String = params.align ? params.align : "center";
+			var w : Number = params['width'];
+			var h : Number = params['height'];
+			var align : String = params['align'] ? params['align'] : "center";
 			
 			var fx : Number = w / displayObject.width;
 			var fy : Number = h / displayObject.height;
