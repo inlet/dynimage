@@ -71,6 +71,7 @@ package dynimage
 				_loader.addEventListener( ImageLoaderEvent.ERROR, onImageLoaderEvent );
 				_loader.addEventListener( ImageLoaderEvent.PROGRESS, onImageLoaderEvent );
 				_loader.addEventListener( ImageLoaderEvent.START, onImageLoaderEvent );
+				
 			}
 			
 			return _instance;	

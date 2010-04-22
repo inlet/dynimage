@@ -14,20 +14,23 @@ package
 	{
 		public function Main()
 		{
-			var preloader : Sprite = new Sprite();
-			preloader.graphics.beginFill(0xff0000);
-			preloader.graphics.drawRect(-150, -150, 300, 300);
-			preloader.graphics.endFill();
 			
-			var img : Image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: 500, height: 300, align: ImageAlign.CENTER}, preloader);
+			var img : Image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: 500, height: 300, align: ImageAlign.CENTER}, new PreloaderAnimation());
 			img.addEventListener(ImageEvent.COMPLETE, imgEvents);
 			img.addEventListener(ImageEvent.PROGRESS, imgEvents);
 			img.addEventListener(ImageEvent.ERROR, imgEvents);
 			img.addEventListener(ImageEvent.STARTED, imgEvents);
+			addChild(img);
+
+			var img2 : Image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: 500, height: 300, align: ImageAlign.CENTER}, new PreloaderAnimation());
+			img2.y = 100;
+			img2.addEventListener(ImageEvent.COMPLETE, imgEvents);
+			img2.addEventListener(ImageEvent.PROGRESS, imgEvents);
+			img2.addEventListener(ImageEvent.ERROR, imgEvents);
+			img2.addEventListener(ImageEvent.STARTED, imgEvents);
+			addChild(img2);
 			
 			
-			var image : Image = new Image("path.to.image", ImageModifiers.fit, {width:300, height:300, align: ImageAlign.TR});
-			addChild(image);
 		}
 		
 
