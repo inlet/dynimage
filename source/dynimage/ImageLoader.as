@@ -55,20 +55,13 @@ package dynimage
 	 */
 	internal class ImageLoader extends EventDispatcher 
 	{
-
+		
 		private var _waitingStack : Array = new Array( );
 		private var _loadingStack : Array = new Array( );
-		private var _loaderCount : uint;
+		internal static var loaderCount : uint = 3;
 
-		/**
-		 * Set the loader count to Image.LOADER_COUNT.
-		 * 
-		 * @param inLoaderCount:Number.
-		 * @see Image.LOADER_COUNT
-		 */
-		public function ImageLoader(inLoaderCount : Number = Number.NaN) 
+		public function ImageLoader() 
 		{
-			_loaderCount = isNaN( inLoaderCount ) ? Image.LOADER_COUNT : inLoaderCount;
 		}
 
 		/**
@@ -134,9 +127,7 @@ package dynimage
 			for each (var fd : ImageData in _waitingStack) 
 			{
 				if (fd.name == inName)
-				{
 					_waitingStack.splice( _waitingStack.indexOf( fd ), 1 );
-				}
 			}
 		}
 
@@ -174,10 +165,13 @@ package dynimage
 
 		private function loadNext() : void 
 		{
-			if (_loadingStack.length == _loaderCount) return;
-			if (_waitingStack.length == 0 && _loadingStack.length == 0) 
+			if (_loadingStack.length == loaderCount) return;
+			if (_waitingStack.length == 0) 
 			{
-				dispatchEvent( new ImageLoaderEvent( ImageLoaderEvent.ALL_LOADED ) );
+				if (_loadingStack.length == 0)
+				{
+					dispatchEvent( new ImageLoaderEvent( ImageLoaderEvent.ALL_LOADED ) );
+				}
 				return;
 			}
 			
@@ -280,10 +274,10 @@ package dynimage
 			
 			return null;
 		}
-
+		
 		override public function toString() : String 
 		{
-			return getQualifiedClassName( this ) + " :: loaderCount[" + _loaderCount + "] loadingStack[" + _loadingStack .length + "] waitingStack[" + _waitingStack.length + "]";
+			return getQualifiedClassName( this ) + " :: loaderCount[" + loaderCount + "] loadingStack[" + _loadingStack .length + "] waitingStack[" + _waitingStack.length + "]";
 		}
 	}
 }
@@ -307,5 +301,10 @@ internal class ImageData
 	{
 		url = inURL;
 		name = inName;
+	}
+	
+	public function toString() : String
+	{
+		return "[ImageData : " + name + "]";
 	}
 }

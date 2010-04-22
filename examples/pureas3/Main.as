@@ -1,7 +1,8 @@
 package  
 {
 	import dynimage.Image;
-	import dynimage.ImageAlign;
+	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import dynimage.ImageEvent;
 	import dynimage.ImageModifiers;
 
@@ -14,29 +15,30 @@ package
 	{
 		public function Main()
 		{
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
 			
-			var img : Image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: 500, height: 300, align: ImageAlign.CENTER}, new PreloaderAnimation());
-			img.addEventListener(ImageEvent.COMPLETE, imgEvents);
-			img.addEventListener(ImageEvent.PROGRESS, imgEvents);
-			img.addEventListener(ImageEvent.ERROR, imgEvents);
-			img.addEventListener(ImageEvent.STARTED, imgEvents);
-			addChild(img);
+			Image.LOADER_COUNT = 1;
+			var image : FadeImage;
+			
+			var leni : uint = 2;
+			for (var i:uint = 0; i < leni*leni; ++i) 
+			{
+				image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: stage.stageWidth/leni, height:stage.stageHeight/leni}, new PreloaderAnimation());
+				image.x = int(i % leni) * stage.stageWidth/leni;
+				image.y = int(i / leni) * stage.stageHeight/leni;
+				image.addEventListener(ImageEvent.STARTED, imageEvents);
+				image.addEventListener(ImageEvent.PROGRESS, imageEvents);
+				image.addEventListener(ImageEvent.ERROR, imageEvents);
+				image.addEventListener(ImageEvent.COMPLETE, imageEvents);
+				addChild(image);
+			}
 
-			var img2 : Image = new FadeImage("mario.jpg", ImageModifiers.fill, {width: 500, height: 300, align: ImageAlign.CENTER}, new PreloaderAnimation());
-			img2.y = 100;
-			img2.addEventListener(ImageEvent.COMPLETE, imgEvents);
-			img2.addEventListener(ImageEvent.PROGRESS, imgEvents);
-			img2.addEventListener(ImageEvent.ERROR, imgEvents);
-			img2.addEventListener(ImageEvent.STARTED, imgEvents);
-			addChild(img2);
-			
-			
 		}
-		
 
-		private function imgEvents(event : ImageEvent) : void 
+		private function imageEvents(event : ImageEvent) : void 
 		{
-			trace(event);
+			trace( event );
 		}
 	}
 }

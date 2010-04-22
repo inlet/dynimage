@@ -41,7 +41,6 @@ package dynimage
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
-	import flash.display.Sprite;
 
 	[Event(name="ImageEvent.STARTED", type="dynimage.ImageEvent")]
 	[Event(name="ImageEvent.PROGRESS", type="dynimage.ImageEvent")]
@@ -50,12 +49,7 @@ package dynimage
 
 	public class Image extends AbstractAsset 
 	{
-		/**
-		 * Throttle setting.
-		 * The amount of loaders to use.
-		 */
-		public static var LOADER_COUNT : int = 3;
-
+		
 		private var _modifier : Function;
 		private var _modifierParams : Object;
 
@@ -73,12 +67,6 @@ package dynimage
 		{
 			_modifier = modifier;
 			_modifierParams = modifierParams;
-
-			if (modifierParams == null)	modifierParams = new Object( );
-			if (modifierParams.width == null) modifierParams.width = 0;
-			if (modifierParams.height == null) modifierParams.height = 0;
-			
-			if (!preloader) preloader = new Sprite( );
 			
 			super( url, preloader, autoStart );
 		}
@@ -91,13 +79,11 @@ package dynimage
 		{
 			super.placePreloader( );
 			
-			if (_modifierParams != null) 
+			if (_modifierParams) 
 			{
-				if (_modifierParams.width == 0 || _modifierParams.height == 0) return;
-				if (_modifierParams.originalWidth == 0 || _modifierParams.originalHeight == 0) return;
-				
-				_preloader.x = _modifierParams.width / 2;
-				_preloader.y = _modifierParams.height / 2;
+				if (!_modifierParams.hasOwnProperty("width") || !_modifierParams.hasOwnProperty("height")) return;
+				_preloader.x = _modifierParams['width'] / 2;
+				_preloader.y = _modifierParams['height'] / 2;
 			}
 		}
 
@@ -109,7 +95,7 @@ package dynimage
 		 */
 		override protected function getModifiedAsset(asset : DisplayObject) : DisplayObject 
 		{
-			if (_modifier != null && _modifierParams != null) return _modifier( asset, _modifierParams );
+			if (_modifier is Function && _modifierParams is Object) return _modifier( asset, _modifierParams );
 			return getCopyAsBitmap( asset );
 		}
 
@@ -121,7 +107,10 @@ package dynimage
 		override public function get width() : Number 
 		{
 			if (_modifierParams)
-				if (_modifierParams.width > 0) return _modifierParams.width;
+			{
+				if (_modifierParams.hasOwnProperty("width")) 
+					return _modifierParams['width'];
+			}
 				
 			return super.width;
 		}
@@ -134,7 +123,10 @@ package dynimage
 		override public function get height() : Number 
 		{
 			if (_modifierParams)
-				if (_modifierParams.height > 0) return _modifierParams.height;
+			{
+				if (_modifierParams.hasOwnProperty("height")) 
+					return _modifierParams['height'];
+			}
 			
 			return super.height;
 		}
@@ -169,6 +161,20 @@ package dynimage
 			bmp.smoothing = true;
 			
 			return bmp;
+		}
+		
+		/**
+		 * Throttle setting.
+		 * The amount of loaders to use.
+		 */
+		public static function set LOADER_COUNT(inLoaderCount : uint) : void
+		{
+			ImageLoader.loaderCount = inLoaderCount;
+		}
+
+		public static function get LOADER_COUNT() : uint
+		{
+			return ImageLoader.loaderCount;
 		}
 	}
 }
