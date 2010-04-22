@@ -143,3 +143,19 @@ You can modify the amount of loaders by editing the LOADER_COUNT static, for exa
 Image.LOADER_COUNT = 5;
 </pre>
 
+
+# Listening to events
+
+<pre>
+var image : Image = new Image("path.to.image");
+image.addEventListener(ImageEvent.COMPLETE, imgEvents);
+image.addEventListener(ImageEvent.PROGRESS, imgEvents);
+image.addEventListener(ImageEvent.ERROR, imgEvents);
+image.addEventListener(ImageEvent.STARTED, imgEvents);
+
+
+function imgEvents ( event : ImageEvent )
+{
+	trace( event );
+}
+</pre>
